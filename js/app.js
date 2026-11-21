@@ -681,6 +681,7 @@
   function initIntro() {
     const el = $('#intro');
     const target = $('#introType');
+    const bar = $('#introBar');
     if (!el) return;
     let seen = false;
     try { seen = sessionStorage.getItem('hd-intro') === '1'; } catch (e) { /* 隐私模式 */ }
@@ -698,7 +699,7 @@
       el.classList.add('is-done');
       document.body.classList.remove('is-intro');
       try { sessionStorage.setItem('hd-intro', '1'); } catch (e) { /* ignore */ }
-      setTimeout(() => el.remove(), 600);
+      setTimeout(() => el.remove(), 750);
     };
     let i = 0;
     const type = () => {
@@ -706,12 +707,13 @@
       if (!target) { done(); return; }
       if (i < text.length) {
         target.textContent = text.slice(0, ++i);
-        setTimeout(type, 125);
+        if (bar) bar.style.width = ((i / text.length) * 100).toFixed(1) + '%';
+        setTimeout(type, 128);
       } else {
-        setTimeout(done, 750);
+        setTimeout(done, 800);
       }
     };
-    setTimeout(type, 300);
+    setTimeout(type, 320);
     el.addEventListener('click', done);
     document.addEventListener('keydown', done, { once: true });
   }
@@ -730,11 +732,106 @@
     stats.hidden = false;
   }
 
+  /* ---------------- 左下角播放器 ---------------- */
+  function initMusicPlayer() {
+    const root = $('#player');
+    const audio = $('#playerAudio');
+    const disc = $('#playerDisc');
+    const toggleBtn = $('#playerToggle');
+    const titleEl = $('#playerTitle');
+    const indexEl = $('#playerIndex');
+    const bar = $('#playerBar');
+    if (!root || !audio || !disc || !toggleBtn) return;
+
+    const tracks = [
+      { title: '海底', src: 'music/hd.mp3' },
+      { title: '雷雨季节', src: 'music/lyjj.mp3' },
+      { title: '胡广生', src: 'music/hgs.mp3' },
+    ];
+    let index = 0;
+
+    function renderTrack() {
+      const track = tracks[index];
+      if (titleEl) titleEl.textContent = track.title;
+      if (indexEl) indexEl.textContent = String(index + 1).padStart(2, '0');
+      if (bar) bar.style.width = '0%';
+      if ('mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: track.title,
+            artist: '海底',
+            album: '海底 · 2026',
+          });
+        } catch (e) { /* ignore */ }
+      }
+    }
+
+    function play() {
+      const p = audio.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
+    }
+
+    function syncUI() {
+      const on = !audio.paused && !audio.ended;
+      root.classList.toggle('is-playing', on);
+      toggleBtn.setAttribute('aria-label', on ? '暂停' : '播放');
+    }
+
+    function setTrack(next, autoplay) {
+      index = (next + tracks.length) % tracks.length;
+      audio.src = tracks[index].src;
+      audio.load();
+      renderTrack();
+      if (!autoplay) audio.pause();
+      if (autoplay) play();
+    }
+
+    audio.addEventListener('play', syncUI);
+    audio.addEventListener('pause', syncUI);
+    audio.addEventListener('timeupdate', () => {
+      if (!bar || !isFinite(audio.duration) || !audio.duration) return;
+      bar.style.width = Math.min(100, (audio.currentTime / audio.duration) * 100).toFixed(2) + '%';
+    });
+    audio.addEventListener('ended', () => setTrack(index + 1, true));
+
+    root.addEventListener('click', (e) => {
+      const action = e.target.closest('[data-player]');
+      if (action) {
+        const kind = action.getAttribute('data-player');
+        if (kind === 'prev') setTrack(index - 1, !audio.paused);
+        if (kind === 'next') setTrack(index + 1, !audio.paused);
+        if (kind === 'toggle') {
+          if (audio.paused) play();
+          else { audio.pause(); syncUI(); }
+        }
+        return;
+      }
+      if (e.target.closest('#playerDisc')) {
+        if (audio.paused) play();
+        else { audio.pause(); syncUI(); }
+      }
+    });
+
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.setActionHandler('play', play);
+        navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+        navigator.mediaSession.setActionHandler('previoustrack', () => setTrack(index - 1, !audio.paused));
+        navigator.mediaSession.setActionHandler('nexttrack', () => setTrack(index + 1, !audio.paused));
+      } catch (e) { /* ignore */ }
+    }
+
+    audio.volume = 0.7;
+    setTrack(0, false);
+    syncUI();
+  }
+
   /* ---------------- 启动 ---------------- */
   initIntro();
   initPetals();
   initTyper();
   initUi();
+  initMusicPlayer();
   route();
   loadContent();
 

@@ -82,6 +82,18 @@
     <symbol id="i-github" viewBox="0 0 24 24">
       <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.88 1.52 2.32 1.08 2.88.82.09-.64.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.8c.85 0 1.7.11 2.5.34 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/>
     </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M8.5 5.4v13.2L19 12z" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24">
+      <path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24">
+      <path d="M6.5 5h2v14h-2zM19 5.2v13.6L8.8 12z" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-next" viewBox="0 0 24 24">
+      <path d="M15.5 5h2v14h-2zM5 5.2v13.6L15.2 12z" fill="currentColor"/>
+    </symbol>
   </svg>
 
   <div class="shell" id="shell">
@@ -416,9 +428,36 @@
     </figure>
   </div>
 
-  <!-- 开场：一字一字 -->
+  <!-- 音乐播放器 -->
+  <div class="player" id="player" aria-label="音乐播放器">
+    <button class="player__disc" id="playerDisc" type="button" aria-label="播放或暂停">
+      <span class="player__label">海</span>
+    </button>
+    <div class="player__panel">
+      <div class="player__meta">
+        <span class="player__kicker">NOW PLAYING · <b id="playerIndex">01</b> / 03</span>
+        <span class="player__title" id="playerTitle">海底</span>
+      </div>
+      <div class="player__controls">
+        <button class="player__btn" type="button" data-player="prev" aria-label="上一首"><svg><use href="#i-prev"/></svg></button>
+        <button class="player__btn player__btn--main" type="button" data-player="toggle" id="playerToggle" aria-label="播放">
+          <svg class="player__ico-play"><use href="#i-play"/></svg>
+          <svg class="player__ico-pause"><use href="#i-pause"/></svg>
+        </button>
+        <button class="player__btn" type="button" data-player="next" aria-label="下一首"><svg><use href="#i-next"/></svg></button>
+      </div>
+      <div class="player__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="player__progress" aria-hidden="true"><i id="playerBar"></i></div>
+    </div>
+    <audio id="playerAudio" preload="none"></audio>
+  </div>
+
+  <!-- 开场 -->
   <div class="intro" id="intro" role="presentation">
-    <p class="intro__type"><span id="introType"></span><i class="intro__cursor" aria-hidden="true"></i></p>
+    <div class="intro__frame">
+      <p class="intro__type"><span id="introType"></span><i class="intro__cursor" aria-hidden="true"></i></p>
+      <span class="intro__bar" aria-hidden="true"><i id="introBar"></i></span>
+    </div>
   </div>
 </body>
 </html>

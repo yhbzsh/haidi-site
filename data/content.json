@@ -11,6 +11,62 @@
   },
   "projects": [
     {
+      "id": "haidi-tool",
+      "title": "海底渗透工具箱",
+      "summary": "第一套手写 Tkinter 桌面程序：信息收集、端口扫描、哈希与字典、反编译入口、音乐播放，一个窗口串起五个模块。",
+      "cover": "img/web/cover-tool.webp",
+      "tags": [
+        "Tkinter",
+        "Python",
+        "安全工具",
+        "桌面应用"
+      ],
+      "status": "offline",
+      "statusText": "已归档",
+      "start": "2022",
+      "period": "2022.08",
+      "role": "独立完成",
+      "level": "基础",
+      "article": "tkinter-toolbox",
+      "metrics": [
+        {
+          "label": "代码行数",
+          "value": "1,006"
+        },
+        {
+          "label": "功能模块",
+          "value": "5"
+        },
+        {
+          "label": "哈希算法",
+          "value": "5"
+        },
+        {
+          "label": "内置音乐",
+          "value": "3"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/haidi-tool/home.webp",
+          "caption": "首页：自绘导航、HAIDI 标志与侧栏音乐播放"
+        },
+        {
+          "src": "uploads/projects/haidi-tool/portscan.webp",
+          "caption": "信息收集：TCP 端口扫描结果与本机网络信息"
+        },
+        {
+          "src": "uploads/projects/haidi-tool/hash.webp",
+          "caption": "密码破解：MD5/SHA-1/256/384/512 与加盐结果、字典生成"
+        },
+        {
+          "src": "uploads/projects/haidi-tool/decompile.webp",
+          "caption": "反编译器：pydumpck 入口、Nuitka 打包与日志区"
+        }
+      ],
+      "body": "## 背景\n\n2022 年写的第一套桌面程序。当时想要一个自己的「工具箱」：信息收集、端口扫描、哈希、字典、反编译入口、音乐播放，全部塞进一个 Tkinter 窗口，不用来回开终端。\n\n## 功能\n\n- 信息收集：WMI 读取主机信息，`socket` TCP connect 扫端口，`ping` 判断存活，`ipconfig` 输出网络配置；\n- 密码破解：对输入做 MD5 / SHA-1 / SHA-256 / SHA-384 / SHA-512 和加盐，支持按字符集与位数生成字典；\n- 反编译器：调用外部 `pydumpck`，提供三个在线 pyc 反编译入口；\n- 软件设置：Nuitka 打包入口、主题切换；\n- 音乐：`pygame.mixer` 播放《海底》《雷雨季节》《胡广生》。\n\n## 实现\n\n界面是自绘导航：顶部用 `Label` 绑定点击，切换多个 `Frame`；布局以 `place`/`pack` 为主。逻辑与界面混在一个 1,006 行的 `mian.py` 里，全局变量共享状态。\n\n## 结果\n\n端口扫描和哈希页都能实际运行，截图保留在项目页；音乐用 `pygame` 加载本地 mp3。\n\n## 复盘\n\n现在会拆成 `core/` 与 `ui/` 两层，线程结果用 `queue` + `after` 回主线程；端口扫描加超时与线程池；暂停用 `pygame.mixer.music.pause()` 而不是 `stop()`。详细分析见文章《第一套手写桌面程序：Tkinter 工具箱的 1,006 行》。\n"
+    },
+    {
       "id": "haidi-range",
       "title": "海底靶场",
       "summary": "自己搭的 XSS / 注入练习环境，只对自己的服务器做授权练习；服务器下线后归档，复盘留成了文章。",
@@ -601,6 +657,21 @@
     }
   ],
   "posts": [
+    {
+      "id": "tkinter-toolbox",
+      "title": "第一套手写桌面程序：Tkinter 工具箱的 1,006 行",
+      "summary": "信息收集、端口扫描、哈希与字典、反编译入口、音乐播放——把五件事塞进一个 Tkinter 窗口，以及现在会重写的地方。",
+      "date": "2026-11-25",
+      "tags": [
+        "Tkinter",
+        "Python",
+        "桌面应用",
+        "安全"
+      ],
+      "level": "基础",
+      "draft": false,
+      "body": "## 起点\n\n2022 年，我想做一个自己的「工具箱」。当时会的东西不多：Tkinter、`requests`、`socket`、`hashlib`，于是决定先把它们拼起来——一个窗口，五个模块，能跑就行。\n\n代码最后是 1,006 行，全部在一个 `mian.py` 里，没有任何第三方 UI 框架。\n\n## 界面结构\n\n没有用 `ttk.Notebook`，而是自己画导航：\n\n```python\nnav = tk.Label(fr0, text=\"信息收集\", bg=\"#95b2c4\", cursor=\"hand2\")\nnav.bind(\"<Button-1>\", lambda e: show_page(\"collect\"))\n```\n\n每个页面是一个 `Frame`，切换时 `pack_forget()` / `pack()`。好处是能完全控制样式，坏处是页面一多，显示逻辑就散落在各处。\n\n## 信息收集\n\n主机信息走 WMI：\n\n```python\nw = wmi.WMI()\nfor cs in w.Win32_ComputerSystem():\n    text.insert(INSERT, \"电脑名称: %s\" % cs.Caption)\n```\n\n端口扫描是每个端口一个线程，`connect` 成功就往 `Treeview` 里插一条：\n\n```python\ndef portscan(target, port, tree):\n    try:\n        c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n        c.connect((target, port))\n        tree.insert(\"\", END, text=target, values=(port, \"OPEN\"))\n        c.close()\n    except Exception:\n        pass\n```\n\n这里的问题很明显：没有超时、线程数量不可控、跨线程直接操作控件。放到现在我会用 `connect_ex` + 超时 + 线程池，结果塞进 `queue`，主线程用 `after(50, poll)` 更新界面。\n\n## 哈希与字典\n\n`hashlib` 把 MD5 / SHA-1 / SHA-256 / SHA-384 / SHA-512 一次算完，再加一个盐值版本：\n\n```python\nmd5 = hashlib.md5()\nmd5.update(pwd.encode(\"utf-8\"))\nsha256.update((pwd + salt).encode(\"utf-8\"))\n```\n\n字典生成按字符集和位数做笛卡尔积，写文件。这个模块只适合在授权环境里做教学演示，不能用于未授权系统——现在回看，当时对边界写得太轻。\n\n## 反编译与打包\n\n反编译不是自己实现，而是调用外部 `pydumpck`，再给三个在线 pyc 工具入口；打包用 Nuitka：\n\n```python\nsubprocess.getoutput(f\"nuitka --windows-disable-console {py}\")\n```\n\n进度条其实是 `sleep` + 固定百分比，不是真实进度。现在会读子进程 stdout，按阶段更新。\n\n## 音乐播放\n\n`pygame.mixer` 加载本地 mp3，三首歌：海底、雷雨季节、胡广生。侧栏的「播放 / 暂停」按钮里，暂停实际调用的是：\n\n```python\npygame.mixer.music.stop()\n```\n\n`stop()` 会把播放位置清零，所以再点播放是从头开始——严格来说是「停止」不是「暂停」。正确写法是 `pause()` / `unpause()`。这个 bug 一直留到项目归档。\n\n## 现在会怎么改\n\n1. 拆 `core/`（扫描、哈希、字典）和 `ui/`，核心逻辑不依赖 Tkinter；\n2. 线程结果统一走 `queue`，界面用 `after` 轮询，不跨线程碰控件；\n3. 端口扫描加超时、并发上限、CIDR 解析；\n4. 配置、日志、异常处理补齐；\n5. 音乐暂停改 `pause/unpause`；\n6. 加测试：哈希已知向量、端口参数解析、字典边界。\n\n## 结果\n\n四个页面都能实际运行，截图在项目页。它不算精致，但这是我第一次把「界面、网络、哈希、打包」放进同一个程序里，也是后面所有项目的起点。\n"
+    },
     {
       "id": "tomato-cbam",
       "title": "ResNet50 + CBAM 做番茄缺陷检测：94.2% 与它的过拟合",
