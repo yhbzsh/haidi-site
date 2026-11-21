@@ -1,0 +1,15 @@
+{
+  "listings": 2934,
+  "median_rent": 3850,
+  "mean_rent": 3921,
+  "p90_rent": 5400,
+  "median_area": 55.0,
+  "median_unit_price": 71.7,
+  "districts": 14,
+  "top_district_count": "朝阳",
+  "top_district_count_n": 854,
+  "highest_district": "东城",
+  "highest_rent": 5000,
+  "elevator_ratio": 0.404,
+  "top_layout": "2室1厅1卫"
+}

@@ -1,0 +1,774 @@
+{
+  "version": 1,
+  "updated": "2026-11-21T10:43:19+08:00",
+  "site": {
+    "name": "海底",
+    "domain": "haidi.fun",
+    "email": "3215703361@qq.com",
+    "github": "https://github.com/yhbzsh",
+    "motto": "风虽大 都绕过我的灵魂",
+    "icp": ""
+  },
+  "projects": [
+    {
+      "id": "haidi-range",
+      "title": "海底靶场",
+      "summary": "自己搭的 XSS / 注入练习环境，只对自己的服务器做授权练习；服务器下线后归档，复盘留成了文章。",
+      "cover": "img/web/cover-range.webp",
+      "tags": [
+        "PHP",
+        "MySQL",
+        "安全"
+      ],
+      "status": "offline",
+      "statusText": "已归档",
+      "start": "2022-10",
+      "period": "2022.10",
+      "role": "独立完成",
+      "article": "xss-retro",
+      "metrics": [
+        {
+          "label": "题目",
+          "value": "3 道"
+        },
+        {
+          "label": "类型",
+          "value": "反射/存储/DOM"
+        },
+        {
+          "label": "状态",
+          "value": "已归档"
+        }
+      ],
+      "gallery": [],
+      "body": "## 做了什么\n\n用 PHP + MySQL 搭的几道 XSS 题目，以及一套简单的成绩记录。\n\n## 学到什么\n\n- 输出转义比输入过滤更可靠；\n- 会话 Cookie 加 `HttpOnly` 能直接抬高利用成本；\n- 靶场跑在自己的服务器上，攻击面必须最小化。\n\n## 现状\n\n服务器下线，代码归档；复盘写成了一篇博客。\n",
+      "level": "基础"
+    },
+    {
+      "id": "film-sentiment",
+      "title": "影评情感分析",
+      "summary": "50 条豆瓣长评的分词、情感分布与词云，顺便验证了一件事：小样本上训练分类器没有统计意义。",
+      "cover": "img/web/cover-film.webp",
+      "tags": [
+        "jieba",
+        "TF-IDF",
+        "NLP",
+        "可视化"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2023",
+      "period": "2023.07",
+      "role": "独立完成",
+      "article": "movie-review-sentiment",
+      "metrics": [
+        {
+          "label": "影评",
+          "value": "50 条"
+        },
+        {
+          "label": "正面占比",
+          "value": "94%"
+        },
+        {
+          "label": "涉及电影",
+          "value": "41 部"
+        },
+        {
+          "label": "平均长度",
+          "value": "135 字"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/film/sentiment.webp",
+          "caption": "情感分布：47 正面 / 1 中性 / 2 负面，正面率 94%"
+        },
+        {
+          "src": "uploads/projects/film/top-movies.webp",
+          "caption": "评论最多的电影 Top 8，《重庆森林》位列第一"
+        },
+        {
+          "src": "uploads/projects/film/wordcloud.webp",
+          "caption": "高频词云：电影、镜头、导演、故事、时间"
+        },
+        {
+          "src": "uploads/projects/film/length.webp",
+          "caption": "评论长度分布：平均 135 字，长评集中在 80-220 字"
+        }
+      ],
+      "body": "## 数据\n\n豆瓣长评 50 条，字段包括电影名、评论标题、正文、情感得分、情感分类（正面/中性/负面）。\n\n## 方法\n\n- jieba 分词，去掉简单停用词；\n- TF-IDF（5000 维）+ MultinomialNB / 线性 SVM；\n- 可视化：情感饼图、Top 电影、词云、评论长度分布。\n\n## 结果\n\n- 50 条里 47 条正面、1 条中性、2 条负面；\n- 平均评论长度 135 字；\n- 词云里「电影、镜头、导演、故事」出现最多。\n\n## 复盘\n\n- 50 条样本切分训练/测试后每类只有几条，分类器准确率没有统计意义，所以最终只保留可视化结论；\n- 豆瓣长评本身偏向「愿意认真写的人」，94% 正面是采样偏差，不能推断成「全网好评率」；\n- 想做真正的情感分类，至少需要几千条带标注的数据，并且分电影/分时间段做交叉验证。\n",
+      "level": "基础"
+    },
+    {
+      "id": "kmeans-iris",
+      "title": "K-Means 鸢尾花聚类",
+      "summary": "复现时发现原代码聚了 4 类却只画了 3 类；用 ARI 和轮廓系数重新选 k，k=3 最符合真实类别。",
+      "cover": "img/web/cover-kmeans.webp",
+      "tags": [
+        "sklearn",
+        "K-Means",
+        "聚类"
+      ],
+      "status": "offline",
+      "statusText": "已复现",
+      "start": "2023",
+      "period": "2023.11",
+      "role": "独立完成",
+      "article": "kmeans-iris",
+      "metrics": [
+        {
+          "label": "样本",
+          "value": "150"
+        },
+        {
+          "label": "k=3 ARI",
+          "value": "0.73"
+        },
+        {
+          "label": "k=3 轮廓",
+          "value": "0.553"
+        },
+        {
+          "label": "最佳 k（轮廓）",
+          "value": "2"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/kmeans/clusters.webp",
+          "caption": "真实类别与 k=3 聚类（PCA 降到二维展示）"
+        },
+        {
+          "src": "uploads/projects/kmeans/silhouette.webp",
+          "caption": "k=2..6 的轮廓系数：k=2 最高，但 k=3 才对应三个物种"
+        }
+      ],
+      "body": "## 数据\n\nsklearn 鸢尾花：150 条、4 个特征、3 个真实类别。\n\n## 原实现的问题\n\n- `n_clusters=4`，但鸢尾花只有 3 类；\n- 画图只画了 label 0/1/2，第 4 类被静默丢掉；\n- 用前两个特征画散点，信息有损失。\n\n## 复现与对比\n\n- k=3：ARI 0.73，轮廓系数 0.553；\n- k=4：ARI 0.65，轮廓系数 0.498；\n- 轮廓系数在 k=2 时最高，但 versicolor 和 virginica 在特征空间本来就重叠。\n\n## 结论\n\n选 k 不能只看轮廓系数，要结合业务含义；聚类前要做标准化，尤其是量纲不同的特征。\n",
+      "level": "基础"
+    },
+    {
+      "id": "recruit-viz",
+      "title": "招聘数据采集与可视化",
+      "summary": "881 页岗位数据从抓取、清洗到四类图表，最后发现这是一份基层岗位市场，而不是互联网高薪岗位。",
+      "cover": "img/web/cover-data.webp",
+      "tags": [
+        "Python",
+        "爬虫",
+        "pandas",
+        "数据可视化"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2023",
+      "period": "2023.04 - 2023.05",
+      "role": "独立完成",
+      "article": "recruit-data-pipeline",
+      "metrics": [
+        {
+          "label": "抓取岗位",
+          "value": "11,573"
+        },
+        {
+          "label": "有效薪资",
+          "value": "8,212"
+        },
+        {
+          "label": "薪资中位数",
+          "value": "¥3,750"
+        },
+        {
+          "label": "抓取页数",
+          "value": "881"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/recruit/salary.webp",
+          "caption": "薪资分布：8,212 条可解析月薪，中位数 3,750，均值被高薪拉高到 4,427"
+        },
+        {
+          "src": "uploads/projects/recruit/education.webp",
+          "caption": "学历要求：不限学历占比最高，本科并不是主力"
+        },
+        {
+          "src": "uploads/projects/recruit/scale.webp",
+          "caption": "公司规模：30-99 人的中小企业最多"
+        },
+        {
+          "src": "uploads/projects/recruit/nature.webp",
+          "caption": "公司性质：民营企业占绝大多数"
+        },
+        {
+          "src": "uploads/projects/recruit/experience.webp",
+          "caption": "经验要求：经验不限为主，面向的是一线操作岗位"
+        },
+        {
+          "src": "uploads/projects/recruit/keywords.webp",
+          "caption": "岗位高频词：普工、操作工、保洁、保安、文员、客服"
+        }
+      ],
+      "body": "## 背景\n\n需求是给一份招聘市场分析。数据源是公共就业服务平台，搜索接口按页返回，每页 10 条，一共 881 页。\n\n## 我做了什么\n\n1. `requests` 按页抓取，每页存一个 JSON；\n2. 清洗成 7 列：岗位名、薪资、学历、经验、公司性质、公司名、公司规模；\n3. 把 `6-9K·13薪`、`200-300元/天`、`面议` 这类薪资统一成月薪；\n4. pandas 做分布统计，matplotlib 出图。\n\n## 结果\n\n- 11,573 条岗位，其中 8,212 条能解析出月薪，约 29% 是「面议」或空值；\n- 月薪中位数 **3,750**，P90 是 9,000；\n- 学历要求最高的是「学历不限」，岗位高频词是普工、操作工、保洁、保安；\n- 结论和最初的假设相反：这不是互联网招聘数据，而是**基层岗位市场**。\n\n## 复盘\n\n- 爬虫里的 `multiprocessing.Process(target=gether(inp))` 写错了：创建进程时就执行了函数，实际没有并发。正确写法是 `target=gether, args=(inp,)`；\n- 每页 JSON 被存了两层（`json.dump` 了一个 JSON 字符串），读取要解两次；\n- 薪资必须先分类再统计，否则「面议」会把中位数拉低。\n",
+      "level": "进阶"
+    },
+    {
+      "id": "chain-eda",
+      "title": "北京租房数据分析（EDA）",
+      "summary": "2,934 条链家房源，从清洗到区域租金、面积-租金密度、电梯与户型，回答“在北京租房贵在哪”。",
+      "cover": "img/web/cover-chain.webp",
+      "tags": [
+        "pandas",
+        "seaborn",
+        "EDA"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2023",
+      "period": "2023.06",
+      "role": "独立完成",
+      "article": "beijing-rent-eda",
+      "metrics": [
+        {
+          "label": "房源",
+          "value": "2,934"
+        },
+        {
+          "label": "租金中位数",
+          "value": "¥3,850"
+        },
+        {
+          "label": "覆盖区域",
+          "value": "14 个"
+        },
+        {
+          "label": "有电梯比例",
+          "value": "40.4%"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/chain/district-rent.webp",
+          "caption": "各区租金中位数：东城 5,000 最高，房山 2,400 最低，只统计房源数 ≥ 30 的区"
+        },
+        {
+          "src": "uploads/projects/chain/area-rent.webp",
+          "caption": "面积-租金密度：50-90㎡ 是租赁主力，超过 120㎡ 后租金增长明显放缓"
+        },
+        {
+          "src": "uploads/projects/chain/rent-box.webp",
+          "caption": "整体租金分布：长尾明显，所以用 boxenplot 而不是普通箱线图"
+        },
+        {
+          "src": "uploads/projects/chain/rent-district-box.webp",
+          "caption": "分区租金分布：朝阳样本最多，但中位数低于东城"
+        },
+        {
+          "src": "uploads/projects/chain/one-bedroom.webp",
+          "caption": "一室户型的平均租金与房源数量"
+        },
+        {
+          "src": "uploads/projects/chain/facility.webp",
+          "caption": "房源基础设施分布：电梯、车位、水电燃气"
+        }
+      ],
+      "body": "## 数据\n\n链家北京租房 2,934 条，20 个字段：行政区、商圈、小区、户型、面积、租金、单价、装修、朝向、楼层、电梯等。\n\n## 清洗\n\n- 租金、面积强制转数值并去掉空值；\n- 单价 = 租金 / 面积，检查异常值；\n- 把「行政区 + 商圈」拼成一列，用于统计 Top 商圈；\n- 按区比较时设置最小样本阈值（≥30 条），避免门头沟几十条样本得出极端中位数。\n\n## 结论\n\n- 中位租金 **3,850 元/月**，P90 5,400；\n- 东城 5,000 > 朝阳 4,800 > 海淀 4,600 > 西城 4,500，房山 2,400 最低；\n- 40.4% 的房源有电梯；2 室 1 厅是主流户型；\n- 面积-租金密度图显示 50-90㎡ 是主力区间。\n\n## 复盘\n\n- 租金是长尾分布，普通箱线图会把绝大多数点压成一条线，boxenplot 更容易看分位数；\n- 区域样本量差异很大，直接按区排名会误导，必须同时报告样本数；\n- 下一步可以做「同商圈、同户型」的单价对比，才有真实的性价比结论。\n",
+      "level": "进阶"
+    },
+    {
+      "id": "credit-default",
+      "title": "信用卡逾期预测",
+      "summary": "30,000 条持卡人数据、22% 逾期率，对比四种分类器：随机森林 Accuracy 0.815、AUC 0.762。",
+      "cover": "img/web/cover-credit.webp",
+      "tags": [
+        "sklearn",
+        "分类模型",
+        "特征工程"
+      ],
+      "status": "offline",
+      "statusText": "已复现",
+      "start": "2023",
+      "period": "2023.12",
+      "role": "独立完成",
+      "article": "credit-default",
+      "metrics": [
+        {
+          "label": "样本",
+          "value": "30,000"
+        },
+        {
+          "label": "逾期率",
+          "value": "22.1%"
+        },
+        {
+          "label": "最佳 Accuracy",
+          "value": "0.815"
+        },
+        {
+          "label": "最佳 AUC",
+          "value": "0.762"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/credit/label-dist.webp",
+          "caption": "标签分布：22.1% 的客户下月逾期，属于轻度不平衡"
+        },
+        {
+          "src": "uploads/projects/credit/models.webp",
+          "caption": "四种模型对比：随机森林的 Accuracy 和 AUC 都最高"
+        }
+      ],
+      "body": "## 数据\n\n30,000 条持卡人，23 个特征（额度、年龄、还款状态、账单金额等），标签是「下月是否逾期」，正例占 22.1%。\n\n## 流程\n\n1. 去掉 ID，70/30 分层切分；\n2. 数值特征标准化；\n3. 四种分类器：逻辑回归、决策树、随机森林、KNN；\n4. 同时看 Accuracy 和 AUC。\n\n## 结果\n\n| 模型 | Accuracy | AUC |\n| --- | --- | --- |\n| 逻辑回归 | 0.811 | 0.722 |\n| 决策树 | 0.811 | 0.755 |\n| 随机森林 | **0.815** | **0.762** |\n| KNN | 0.804 | 0.724 |\n\n## 复盘\n\n- 22% 正例下，全预测「不逾期」也有 78% 准确率，所以只看 Accuracy 会被骗；\n- AUC 0.76 只能算「可用」，距离生产还有距离；\n- 下一步：阈值按业务代价调（漏判坏客户的成本远高于误判好客户）、特征工程（额度使用率、还款延迟天数）、类别权重。\n",
+      "level": "进阶"
+    },
+    {
+      "id": "web-vuln-scanner",
+      "title": "Web 漏洞扫描平台",
+      "summary": "Django + MySQL + nikto：目标登记、端口初筛、漏洞检测、结果入库与报告，一套完整的扫描链路。",
+      "cover": "img/web/cover-sec.webp",
+      "tags": [
+        "Django",
+        "MySQL",
+        "nikto",
+        "安全"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2023",
+      "period": "2023.05",
+      "role": "独立完成",
+      "article": "",
+      "metrics": [
+        {
+          "label": "后端",
+          "value": "Django"
+        },
+        {
+          "label": "数据库",
+          "value": "MySQL"
+        },
+        {
+          "label": "扫描引擎",
+          "value": "nikto"
+        },
+        {
+          "label": "报告",
+          "value": "入库 + 页面"
+        }
+      ],
+      "gallery": [],
+      "body": "## 是什么\n\n一个 Web 化的扫描平台：录入目标、创建扫描任务、按端口做初筛，再调用 nikto 做 Web 漏洞检测，结果入库并生成可查看的报告。\n\n## 架构\n\n```\n浏览器 → Django（用户/任务/结果） → MySQL\n                     ↓\n             subprocess → nikto（Perl）\n                     ↓\n              文本解析 → 翻译 → 入库\n```\n\n## 关键实现\n\n- `Scans` 模型存 ip、port、problem、count、create_time；\n- 同一 `ip:port` 先查缓存，避免重复扫；\n- `subprocess.Popen` 逐行读 nikto 输出，UTF-8 失败时回退 GBK；\n- 按分隔线切出报告主体，去掉 `+` 前缀，再调翻译接口；\n- 列表接口用 `Paginator` 返回 `{code,msg,count,data}`，前端表格渲染；\n- 首页用 `psutil` 展示内存占用和最近 7 天扫描量。\n\n## 应该改的地方\n\n- `os.chdir` 是进程级全局状态，并发扫描会互相踩，应该用 `Popen(..., cwd=...)`；\n- 同步跑 nikto 会占住 worker，应该丢给队列；\n- 结果存纯文本不利于统计，应该拆成 findings 表（端口/类型/等级/CVE）。\n\n## 边界\n\n只对登记过授权范围的目标开放，扫描前必须先登记授权。\n",
+      "level": "综合"
+    },
+    {
+      "id": "face-checkin",
+      "title": "人脸签到系统",
+      "summary": "PyQt5 + OpenCV + dlib：摄像头线程、0.6 距离阈值、签到落库与 Excel 导出，处理了桌面端最常见的坑。",
+      "cover": "img/web/cover-cv.webp",
+      "tags": [
+        "PyQt5",
+        "OpenCV",
+        "dlib",
+        "桌面应用"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2023",
+      "period": "2023.08",
+      "role": "独立完成",
+      "article": "",
+      "metrics": [
+        {
+          "label": "界面",
+          "value": "PyQt5"
+        },
+        {
+          "label": "识别",
+          "value": "dlib ResNet"
+        },
+        {
+          "label": "距离阈值",
+          "value": "0.6"
+        },
+        {
+          "label": "导出",
+          "value": "Excel / CSV"
+        }
+      ],
+      "gallery": [],
+      "body": "## 是什么\n\nPyQt5 桌面程序：摄像头实时画面 + dlib 人脸检测与识别，识别到已登记的人就写签到记录，支持查询和 Excel 导出。\n\n## 技术点\n\n- `QThread` 单独跑摄像头采集，主界面不卡；\n- 检测先缩到一半，坐标再乘 2 还原；\n- 识别节流：0.5 秒一次，不每帧都算 128 维特征；\n- 距离 < 0.6 判定为同一人；\n- 特征和签到记录用 pickle 落盘，导出用 pandas。\n\n## 踩过的坑\n\n- 退出不 `cap.release()`，摄像头会被一直占用；\n- `cv2.imread()` 读中文路径返回 None，要 `imdecode`；\n- 同一个人站着不动会重复签到，要按「人 + 时间窗」去重；\n- 人脸库为空时不能只显示「未识别」，要给明确提示。\n",
+      "level": "综合"
+    },
+    {
+      "id": "crowd-detection",
+      "title": "行人检测（FasterRCNN）",
+      "summary": "用 COCO 预训练的 FasterRCNN 在监控画面上做行人检测：3 张图 26/24/12 人，CPU 单张 2.2 秒。",
+      "cover": "img/web/cover-crowd.webp",
+      "tags": [
+        "PyTorch",
+        "FasterRCNN",
+        "OpenCV",
+        "Tkinter"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2023",
+      "period": "2023.09",
+      "role": "独立完成",
+      "article": "fasterrcnn-crowd",
+      "metrics": [
+        {
+          "label": "单图最多",
+          "value": "26 人"
+        },
+        {
+          "label": "平均置信度",
+          "value": "0.83+"
+        },
+        {
+          "label": "CPU 单张",
+          "value": "2.2 s"
+        },
+        {
+          "label": "测试图片",
+          "value": "3 张"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/crowd/detect-1.webp",
+          "caption": "检测结果：26 人，平均置信度 0.917，商场主通道场景"
+        },
+        {
+          "src": "uploads/projects/crowd/detect-2.webp",
+          "caption": "检测结果：24 人，密集区域开始出现遮挡"
+        },
+        {
+          "src": "uploads/projects/crowd/detect-3.webp",
+          "caption": "检测结果：12 人，远处小目标有漏检"
+        }
+      ],
+      "body": "## 任务\n\n给定一张监控画面，框出所有行人并统计人数。\n\n## 方案\n\ntorchvision 的 `fasterrcnn_resnet50_fpn`（COCO 预训练），只保留 `person` 类，分数阈值 0.6。\n\n```python\nmodel = fasterrcnn_resnet50_fpn(weights=FasterRCNN_ResNet50_FPN_Weights.DEFAULT,\n                                box_score_thresh=0.6).eval()\nout = model([tensor])[0]\nkeep = (out[\"labels\"] == 1) & (out[\"scores\"] >= 0.6)\n```\n\n## 结果\n\n- 3 张测试图分别检出 **26 / 24 / 12** 人；\n- 平均置信度 0.917 / 0.834 / 0.849；\n- CPU（i7，无 GPU）单张约 **2.2 秒**。\n\n## 复盘\n\n- 密集场景的远处小目标会漏检，阈值调到 0.4 能找回一部分，但误检也会上升；\n- 2.2 秒/张不能做实时视频，下一步是 ONNX + 半精度，或者换 YOLO/RT-DETR 这类单阶段模型；\n- 原始 Tkinter GUI 是批量处理文件夹，适合离线统计，不适合接摄像头流。\n",
+      "level": "研究"
+    },
+    {
+      "id": "hanzi-cnn",
+      "title": "手写汉字识别（TensorFlow CNN）",
+      "summary": "97 类手写汉字，真实训练 12 个 epoch、测试准确率 82.8%；数据集里的碎图和标签错位才是主要难点。",
+      "cover": "img/web/cover-hanzi.webp",
+      "tags": [
+        "TensorFlow",
+        "CNN",
+        "Keras",
+        "图像分类"
+      ],
+      "status": "offline",
+      "statusText": "已复现",
+      "start": "2023",
+      "period": "2023.10",
+      "role": "独立完成",
+      "article": "cnn-hanzi",
+      "metrics": [
+        {
+          "label": "类别",
+          "value": "97"
+        },
+        {
+          "label": "训练样本",
+          "value": "5,193"
+        },
+        {
+          "label": "测试准确率",
+          "value": "82.8%"
+        },
+        {
+          "label": "训练耗时",
+          "value": "167 s"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/hanzi/training_curve.webp",
+          "caption": "12 个 epoch 的准确率/损失曲线，验证集最终 82.5%"
+        },
+        {
+          "src": "uploads/projects/hanzi/predictions.webp",
+          "caption": "测试样例：8 张里 7 张正确，错例是「秋 → 去」"
+        }
+      ],
+      "body": "## 数据\n\n97 类手写汉字，原始图片是变尺寸 RGB 裁剪，约 1.2 万张。数据里混着 45×9 的碎图和个别 100 类/97 类的标签错位。\n\n## 方案\n\nTensorFlow/Keras 的 3 层 Conv + MaxPool + Dense，输入 96×96 灰度，训练时加随机旋转/平移/缩放。\n\n## 关键处理\n\n- 先按长边补白成正方形再 resize，避免把字拉变形（原脚本直接 `resize` 会让窄字变胖）；\n- 过滤最小边 < 16 的碎图；\n- 标签表是 100 个字，训练目录只有 97 类，按目录编号映射，并记录缺失类别。\n\n## 结果\n\n- 5,193 训练 / 576 验证 / 1,153 测试；\n- 12 epoch 后验证 82.5%，测试 **82.8%**；\n- 随机 8 张样例中 7 张正确。\n\n## 复盘\n\n- 原脚本 `epochs=80000000` 是明显笔误，且没有验证集；\n- 82.8% 是在「每类抽 60 张」的子集上得到的，全量数据复训还会更高；\n- 下一步：分层采样、学习率衰减、混淆矩阵找出易混字（比如提手旁和木字旁）。\n",
+      "level": "研究"
+    },
+    {
+      "id": "tomato-detection",
+      "title": "番茄缺陷检测（ResNet50 + CBAM）",
+      "summary": "4,823 张训练图、1,207 张验证图，ResNet50 加通道/空间注意力，验证准确率 94.20%，F1 0.953。",
+      "cover": "img/web/cover-tomato.webp",
+      "tags": [
+        "PyTorch",
+        "ResNet50",
+        "CBAM",
+        "图像分类"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2024",
+      "period": "2024.05",
+      "role": "独立完成",
+      "level": "研究",
+      "article": "tomato-cbam",
+      "metrics": [
+        {
+          "label": "验证准确率",
+          "value": "94.20%"
+        },
+        {
+          "label": "F1",
+          "value": "0.953"
+        },
+        {
+          "label": "参数量",
+          "value": "27.1M"
+        },
+        {
+          "label": "训练 / 验证",
+          "value": "4,823 / 1,207"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/tomato/training_curves.webp",
+          "caption": "30 个 epoch 的损失/准确率：训练准确率接近 1.0，验证损失从 0.19 回升到 0.35，出现明显过拟合"
+        },
+        {
+          "src": "uploads/projects/tomato/confusion_matrix.webp",
+          "caption": "混淆矩阵：Fresh 427 正确 / 29 误判，Rotten 40 误判 / 710 正确"
+        },
+        {
+          "src": "uploads/projects/tomato/sample_images.webp",
+          "caption": "训练集样本：Fresh 1,855 张、Rotten 2,968 张，类别不平衡约 1:1.6"
+        },
+        {
+          "src": "uploads/projects/tomato/prediction_results.webp",
+          "caption": "验证集预测样例（置信度保留两位）"
+        }
+      ],
+      "body": "## 任务\n\n二分类：番茄新鲜（Fresh）与腐烂（Rotten）。原始标注是 YOLO 格式，这里只取类别标签，转成图像分类任务。\n\n## 数据\n\n- 训练集 4,823 张（Fresh 1,855 / Rotten 2,968），验证集 1,207 张（456 / 751）；\n- 输入 224×224，训练时做水平翻转、±15° 旋转、亮度/对比度扰动；\n- 归一化使用 ImageNet 均值方差。\n\n## 模型\n\nResNet50（ImageNet 预训练）作为主干，接 CBAM：通道注意力 + 空间注意力，再进入 2048→512→2 的分类头，共 27,131,532 个参数。\n\n## 训练\n\nAdam（lr=1e-4，weight_decay=1e-4），CrossEntropyLoss，ReduceLROnPlateau（factor=0.5，patience=5），batch 32，30 个 epoch。\n\n## 结果\n\n- 验证准确率 **94.20%**；\n- Precision 0.9608，Recall 0.9454，F1 0.9530；\n- 混淆矩阵：Fresh 正确 427、误判 29；Rotten 正确 710、误判 40。\n\n## 观察到的问题\n\n训练准确率接近 1.0，而验证损失从第 6 个 epoch 的 0.19 回升到 0.35，属于典型过拟合；同时 Rotten 比 Fresh 多约 60%，模型对 Fresh 的召回略低。\n\n## 改进方向\n\n- 早停 + 保存最优验证权重的策略；\n- 类别权重或加权采样；\n- 更强增强（RandAugment、MixUp）与跨批次难例挖掘；\n- 量化/剪枝后再评估一次延迟。\n"
+    },
+    {
+      "id": "mario-rl",
+      "title": "超级马里奥强化学习（DQN / PPO）",
+      "summary": "两个算法在 SuperMarioBros 1-1 上训练：DQN 评估奖励 353→602，PPO 在 2.11M 步后不稳定。",
+      "cover": "img/web/cover-mario.webp",
+      "tags": [
+        "PyTorch",
+        "DQN",
+        "PPO",
+        "强化学习"
+      ],
+      "status": "offline",
+      "statusText": "已完成",
+      "start": "2024",
+      "period": "2024.06",
+      "role": "独立完成",
+      "level": "研究",
+      "article": "mario-dqn-ppo",
+      "metrics": [
+        {
+          "label": "DQN 回合",
+          "value": "7,320"
+        },
+        {
+          "label": "DQN 评估奖励",
+          "value": "353 → 602"
+        },
+        {
+          "label": "PPO 步数",
+          "value": "2.11M"
+        },
+        {
+          "label": "最远 x",
+          "value": "3,161"
+        }
+      ],
+      "gallery": [
+        {
+          "src": "uploads/projects/mario/reward_curve.webp",
+          "caption": "DQN 与 PPO 的训练/评估奖励曲线：DQN 稳步上升，PPO 回合奖励从 699 回落到 511"
+        }
+      ],
+      "body": "## 目标\n\n用深度强化学习在 SuperMarioBros 1-1 上训练智能体，比较 DQN 与 PPO 的学习稳定性。\n\n## 环境与预处理\n\n- NES 模拟器 + Gym 接口；\n- 跳帧 4、堆叠 4 帧、缩放 84×84 灰度；\n- 奖励缩放 0.1，单回合最大 1,000,000 步；\n- 网络以 4 帧图像为状态输入。\n\n## 算法\n\n- **DQN**：经验回放（100k）、目标网络、ε-greedy 探索；\n- **PPO**：Actor-Critic、GAE、clip 目标、多步 rollout；\n- 两者共用同一套环境包装与评估脚本。\n\n## 结果\n\n| 指标 | DQN | PPO |\n| --- | --- | --- |\n| 回合数 | 7,320 | 3,516 |\n| 评估奖励（首 → 末） | 353 → **602** | 379 → 412 |\n| 评估奖励最大值 | **743** | 708 |\n| 最远 x 坐标 | 1,946 → **3,154** | 2,227 → 2,402 |\n\nPPO 的训练步数达到 2.11M，但回合平均奖励从 699 回落到 511；DQN 的训练曲线更平滑。\n\n## 复盘\n\n- DQN 在这个任务上更稳，PPO 对超参数（clip、学习率、GAE λ）更敏感；\n- 两者最远都到 x≈3,160，未完整通关（终点约 3,200），主要卡在旗杆前的平台；\n- 训练日志完整保留在 TensorBoard，曲线由日志直接生成，不是示意图。\n\n## 局限\n\n- 没有做多种子重复实验，结论只代表这一次训练；\n- 评估只跑了固定关卡，未测泛化；\n- 环境依赖 `gym-super-mario-bros` 与 `nes-py`，未在本仓库内置。\n"
+    }
+  ],
+  "posts": [
+    {
+      "id": "tomato-cbam",
+      "title": "ResNet50 + CBAM 做番茄缺陷检测：94.2% 与它的过拟合",
+      "summary": "从 YOLO 标注转分类、CBAM 结构、30 epoch 训练曲线到混淆矩阵，完整复现一次二分类。",
+      "date": "2026-11-24",
+      "tags": [
+        "PyTorch",
+        "ResNet50",
+        "CBAM",
+        "图像分类"
+      ],
+      "level": "研究",
+      "draft": false,
+      "body": "## 任务与数据\n\n番茄新鲜度二分类。原始标注是 YOLO 格式（每张图一个类别：Fresh / Rotten），这里只取类别，转成图像分类。\n\n| 划分 | 总数 | Fresh | Rotten |\n| --- | --- | --- | --- |\n| 训练 | 4,823 | 1,855 | 2,968 |\n| 验证 | 1,207 | 456 | 751 |\n\n类别比例约 1:1.6，属于轻度不平衡。\n\n## 模型：ResNet50 + CBAM\n\n在 ResNet50 的卷积块后接 CBAM（Convolutional Block Attention Module）：\n\n- **通道注意力**：全局平均/最大池化 → 共享 MLP → Sigmoid，得到每个通道的权重；\n- **空间注意力**：沿通道做平均/最大池化 → 7×7 卷积 → Sigmoid，得到每个位置的权重；\n- 分类头：2048 → 512 → 2。\n\n总参数量 27,131,532。CBAM 的作用是让网络更关注缺陷区域，而不是整颗番茄的颜色。\n\n## 训练配置\n\n```python\noptimizer = Adam(lr=1e-4, weight_decay=1e-4)\ncriterion = CrossEntropyLoss()\nscheduler = ReduceLROnPlateau(factor=0.5, patience=5)\nbatch_size = 32\nepochs = 30\n```\n\n增强：随机水平翻转、±15° 旋转、亮度/对比度 0.2 抖动；输入 224×224，ImageNet 归一化。\n\n## 结果\n\n![训练曲线](uploads/projects/tomato/training_curves.webp)\n\n- 验证准确率 **94.20%**；\n- Precision 0.9608，Recall 0.9454，F1 0.9530。\n\n![混淆矩阵](uploads/projects/tomato/confusion_matrix.webp)\n\nFresh 正确 427、误判 29；Rotten 正确 710、误判 40。\n\n## 过拟合是主要问题\n\n训练准确率接近 1.0，而验证损失在第 6 个 epoch 见底（0.186）后回升到 0.35。验证准确率停在 94% 左右，说明模型已经把训练集“记住”了。\n\n可能的原因：\n\n1. 训练集只有 4,823 张，ResNet50 容量偏大；\n2. 增强强度不够，且没有早停；\n3. 类别不平衡让模型偏向 Rotten。\n\n改进方向：早停 + 最优权重、类别权重、RandAugment/MixUp、先用冻结主干训练分类头再解冻微调。\n\n## 局限\n\n- 只用了单一验证集，没有交叉验证；\n- 没有做跨批次/跨光照的鲁棒性测试；\n- 模型 27M 参数，部署到边缘设备需要量化或换主干。\n"
+    },
+    {
+      "id": "mario-dqn-ppo",
+      "title": "DQN 与 PPO 在超级马里奥上的训练对比：曲线、差异与不稳定性",
+      "summary": "从 TensorBoard 日志还原两条学习曲线：DQN 稳定上升到 602，PPO 在 2.11M 步后回落。",
+      "date": "2026-11-23",
+      "tags": [
+        "PyTorch",
+        "DQN",
+        "PPO",
+        "强化学习"
+      ],
+      "level": "研究",
+      "draft": false,
+      "body": "## 把问题写成 MDP\n\n- 状态：连续 4 帧 84×84 灰度图（4×84×84）；\n- 动作：NES 手柄的离散组合（右、跳、跑等）；\n- 奖励：游戏内得分，乘以 0.1 缩放；\n- 终止：死亡、通关或达到最大步数。\n\n跳帧 4 表示每 4 帧执行一次动作，堆叠 4 帧用于感知速度。\n\n## DQN 与 PPO 的实现差异\n\n**DQN**\n\n```python\nq = model(state)                 # 每个动作的 Q 值\nloss = mse_loss(q.gather(1, action), reward + gamma * target_q.max(1)[0])\n```\n\n- 经验回放 100k，目标网络定期同步；\n- ε-greedy 探索，ε 从 1.0 衰减。\n\n**PPO**\n\n```python\nratio = torch.exp(logp_new - logp_old)\nloss = -torch.min(ratio * adv, torch.clamp(ratio, 1-eps, 1+eps) * adv).mean()\n```\n\n- GAE 估计优势；\n- 多步 rollout，clip 目标；\n- 同时优化策略与价值网络。\n\n## 训练结果\n\n![奖励曲线](uploads/projects/mario/reward_curve.webp)\n\n| 指标 | DQN | PPO |\n| --- | --- | --- |\n| 回合数 | 7,320 | 3,516 |\n| 评估奖励（首 → 末） | 353 → **602** | 379 → 412 |\n| 评估奖励最大 | **743** | 708 |\n| 最远 x | 1,946 → **3,154** | 2,227 → 2,402 |\n\nDQN 的评估奖励稳步上升，最远推进到 x≈3,154；PPO 在 2.11M 步后回合平均奖励从 699 回落到 511，评估奖励停在 400 左右。\n\n## 为什么 PPO 不稳定\n\n1. **奖励尺度与折扣**：0.1 的奖励缩放下，GAE 的 λ 和 γ 需要重新调；\n2. **clip 与学习率**：默认 PPO 超参来自连续控制任务，离散动作 + 像素输入并不适配；\n3. **评估频率**：PPO 的评估次数（150 次）少于 DQN（176 次），曲线噪声更大；\n4. **训练轮数**：3,516 回合不足以让 PPO 收敛到稳定策略。\n\n## 局限与下一步\n\n- 只跑了单一种子，结论不能当作算法优劣的定论；\n- 没有完整通关（x≈3,160，终点约 3,200），卡在旗杆前的平台；\n- 下一步：多种子重复、奖励裁剪、优势归一化、并行环境。\n"
+    },
+    {
+      "id": "rebuild-haidi",
+      "title": "把 2020 年的海底站重写了：首屏从 5 MB 降到 190 KB",
+      "summary": "一次完整的前端性能翻修：懒加载头图、transform 动画、WebP 图片、去掉 jQuery，以及移动端终于能看了。",
+      "date": "2026-11-21",
+      "tags": [
+        "前端",
+        "性能优化"
+      ],
+      "draft": false,
+      "body": "## 为什么要重写\n\n这个站最早是 2022 年照着模板改的：jQuery 3.2、八个全屏面板、用 `left` 属性做翻页动画。当时觉得很酷，直到我用手机打开它——页面上只有一行字：「移动端无法正常访问，请前往 PC 端访问」。\n\n再加上每次点导航都有明显迟滞，我知道该动手了。\n\n## 先量，再改\n\n用 DevTools 的 Network 面板看了一遍，问题很集中：\n\n| 问题 | 数据 |\n| --- | --- |\n| 首屏图片 | 5.4 MB（9 张背景图全部被预加载） |\n| CSS | 105 KB，其中 74 KB 是 200 条粒子动画规则 |\n| jQuery | 85 KB，实际只用到 `.animate()` 和 `.click()` |\n| 入场动画 | 约 3 秒内看不到任何内容 |\n\n最关键的一条：**八个面板都是 `position:absolute` 叠在一起**，浏览器认为每张背景图都在视口内，于是一次性下载全部。\n\n## 四个改动\n\n### 1. 只加载当前面板的图\n\n面板头图改成 `data-src`，切换时再赋值：\n\n```js\nfunction loadHeroes(panel) {\n  panel.querySelectorAll('img[data-src]').forEach((img) => {\n    if (img.dataset.loaded) return;\n    img.src = img.dataset.src;\n    img.dataset.loaded = '1';\n  });\n}\n```\n\n### 2. 用 transform 代替 left\n\n`left` 每帧都会触发布局，`transform` 只走合成层：\n\n```css\n.panel {\n  transform: translate3d(100%, 0, 0);\n  transition: transform .8s cubic-bezier(.22, .8, .3, 1);\n}\n.panel.is-active { transform: translate3d(0, 0, 0); }\n```\n\n### 3. 图片全部转 WebP\n\n素材重新压到 1600px 以内、质量 72，5.4 MB → 428 KB：\n\n> 不是所有图都要保真，被遮罩盖住的背景完全可以牺牲细节。\n\n### 4. 去掉 jQuery\n\n85 KB 的依赖，只换来几个点击事件和动画，用原生 `querySelectorAll` + `classList` 就够了。\n\n## 结果\n\n- 首屏关键资源约 **190 KB**（gzip 后约 133 KB；原来仅图片就是 5.4 MB）\n- 手机上不再是一行「请前往 PC 端」\n- 导航切换只动合成层，低端设备也不掉帧\n- 关掉 JS 也能按顺序读到全部内容\n\n## 还没做完的\n\n- 博客详情目前是 hash 路由，搜索引擎收录不到，后面想预渲染成静态页\n- 图片还能再上 AVIF，笔记也还有一堆没搬进来\n\n一步步来吧，毕竟「千里之行，始于足下」。\n",
+      "level": "综合"
+    },
+    {
+      "id": "recruit-data-pipeline",
+      "title": "881 页招聘数据的清洗与可视化：先确认数据画像",
+      "summary": "从双重 JSON、薪资区间解析到四类图表，中间最大的收获是推翻了「本科为主」的预设。",
+      "date": "2026-11-20",
+      "tags": [
+        "Python",
+        "爬虫",
+        "数据可视化"
+      ],
+      "draft": false,
+      "body": "## 先看数据长什么样\n\n需求是给一份就业市场分析。数据源是公共就业服务平台的搜索接口，每页 10 条，共 881 页。爬下来之后先做了一项基本检查：打印前 20 行。\n\n结果出现了第一个异常：岗位名是「普工」「操作工」「保洁」「保安」。这不是互联网招聘数据，而是基层岗位市场。\n\n![薪资分布](uploads/projects/recruit/salary.webp)\n\n*薪资分布：8,212 条可解析月薪，中位数 3,750 元*\n\n## 抓取：一个真实的并发错误\n\n当时的爬虫这么写：\n\n```python\nprocess1 = multiprocessing.Process(target=gether(inp))\nprocess1.start()\n```\n\n`target=gether(inp)` 在创建 Process 的时候就把函数执行完了，真正的子进程什么也没干。正确写法是 `target=gether, args=(inp,)`。所以这 881 页其实是单线程一页页拉的，只是当时没发现。\n\n另一个坑：每页的响应文本被 `json.dump` 存了一次，读的时候要解两层：\n\n```python\nwith open(f'{i}.json', encoding='utf8') as fp:\n    a = json.loads(json.loads(fp.read()))\nfor row in a['data']['records']:\n    ...\n```\n\n## 清洗：薪资不是一个数字\n\n原始值长这样：`6-9K·13薪`、`200-300元/天`、`面议`、`8千-1.2万`。要统一成月薪：\n\n```python\nm = re.search(r'(\\d+(?:\\.\\d+)?)\\s*-\\s*(\\d+(?:\\.\\d+)?)\\s*(万|千|[Kk])', s)\nif m:\n    lo, hi = float(m.group(1)), float(m.group(2))\n    scale = 10000 if m.group(3) == '万' else 1000\n    monthly = (lo + hi) / 2 * scale\n    if '天' in s:\n        monthly *= 21.75\n```\n\n- 区间取中点；\n- 日薪按 21.75 个工作日折算；\n- `面议` 和解析失败的单列，不参与统计，但要在报告里说明。\n\n这一步之后，11,573 条里剩下 8,212 条有效薪资，**29% 的数据是不可用的**——这个比例本身就是结论的一部分。\n\n## 图表：先看分布，再看结论\n\n```python\nsalary = df['月薪'].dropna()\nplt.hist(salary[salary <= 30000], bins=36)\nplt.axvline(salary.median(), color='#f0506e')\n```\n\n四张图分别回答四个问题：\n\n| 图 | 问题 | 结论 |\n| --- | --- | --- |\n| 薪资分布 | 钱集中在哪 | 中位数 3,750，P90 9,000，长尾 |\n| 学历要求 | 谁在招人 | 「学历不限」最多，本科不是主力 |\n| 公司规模 | 什么公司在招 | 30-99 人的中小企业最多 |\n| 公司性质 | 谁在招 | 民营企业占绝大多数 |\n\n![学历分布](uploads/projects/recruit/education.webp)\n\n*学历要求：不限学历占比最高，和互联网岗位的直觉相反*\n\n再看岗位高频词（jieba 分词后去掉停用词）：\n\n![岗位高频词](uploads/projects/recruit/keywords.webp)\n\n普工 658、操作工 586、保洁 511、保安 344、文员 343、客服 323——这组词比任何模型都更直接地解释了这份数据。\n\n## 复盘\n\n1. **先做数据画像，再做分析**。如果直接套「互联网薪资报告」的模板，结论会全错；\n2. **29% 的缺失值必须交代**。只报 8,212 条的中位数，不说明 3,361 条面议，是不诚实的；\n3. **爬虫的并发写错了**。这个 bug 不影响结果，但影响对「数据量级」的判断；\n4. 如果想进一步分析，应该按城市/行业分组，而不是把 881 页当成一个整体。\n",
+      "level": "进阶"
+    },
+    {
+      "id": "beijing-rent-eda",
+      "title": "北京 2,934 条租房数据：区域、面积与租金的真实关系",
+      "summary": "清洗、分箱、boxenplot 与密度图，最后得到的不是「哪里便宜」，而是「比较之前先看样本量」。",
+      "date": "2026-11-19",
+      "tags": [
+        "pandas",
+        "seaborn",
+        "EDA"
+      ],
+      "draft": false,
+      "body": "## 清洗比画图重要\n\n链家北京租房 2,934 条，20 个字段。第一步不是画图，而是把三类脏数据处理掉：\n\n```python\ndata['租金'] = pd.to_numeric(data['租金'], errors='coerce')\ndata['面积'] = pd.to_numeric(data['面积'], errors='coerce')\ndata = data.dropna(subset=['租金', '面积'])\ndata['单价'] = data['租金'] / data['面积']\n```\n\n- 租金、面积转数值，转不了的置空；\n- 单价 = 租金 / 面积，用来横向比较不同面积；\n- 行政区 + 商圈拼成一列，方便统计 Top 商圈。\n\n## 区域比较：先设最小样本量\n\n直接按区计算中位数容易出问题：门头沟只有几十条房源，中位数很容易被一两套房子带偏。所以先过滤：\n\n```python\ndistrict = (data.groupby('行政区')['租金']\n                 .agg(['count', 'median'])\n                 .query('count >= 30')\n                 .sort_values('median', ascending=False))\n```\n\n![各区租金](uploads/projects/chain/district-rent.webp)\n\n*13 个区满足样本量要求：东城 5,000、朝阳 4,800、海淀 4,600、房山 2,400*\n\n这里的结论要连着样本量一起读：朝阳房源 854 条，是样本最多的区；东城样本少但中位数最高。\n\n## 面积与租金：用密度图\n\n散点图在 2,934 个点上会糊成一团，改用 hexbin：\n\n```python\nhb = ax.hexbin(data['面积'], data['租金'], gridsize=45, cmap='BuPu', mincnt=1)\n```\n\n![面积-租金密度](uploads/projects/chain/area-rent.webp)\n\n- 50-90㎡ 是租赁主力；\n- 超过 120㎡ 后，租金增长明显放缓（大户型单价反而低）；\n- 200㎡ 以上样本很少，不要在这个区间下结论。\n\n## 分布为什么用 boxenplot\n\n租金是长尾分布，普通箱线图会把 90% 的点压成一条线。boxenplot 展示更多分位数，能看出「大部分房源在哪、少数贵房拉到多高」：\n\n![整体租金分布](uploads/projects/chain/rent-box.webp)\n\n*中位租金 3,850 元/月，P90 5,400 元/月*\n\n## 其他维度\n\n- 40.4% 的房源有电梯；\n- 2 室 1 厅是主流户型；\n- 一室户型的平均租金和房源数量关系明显：房源越多的商圈，平均租金越趋于稳定。\n\n![一室户型](uploads/projects/chain/one-bedroom.webp)\n\n## 复盘\n\n1. **比较之前先看样本量**。不设阈值，区域排名会变成噪声排名；\n2. **长尾数据别用均值**。均值 3,921 比中位数 3,850 高，差额就是高价房拉的；\n3. **下一步**：同商圈、同户型、同楼层做匹配，才能得到真实的「性价比」结论。\n",
+      "level": "进阶"
+    },
+    {
+      "id": "python-cms",
+      "title": "用 Python 标准库写一个零依赖的内容后台",
+      "summary": "http.server + JSON 文件 + PBKDF2 + CSRF，一千四百行做出一个够用且不丢人的博客后台。",
+      "date": "2026-11-18",
+      "tags": [
+        "Python",
+        "后端",
+        "安全"
+      ],
+      "draft": false,
+      "body": "## 为什么自己写\n\n博客放静态托管就够用了，但我需要一个「能发布新文章和作品」的入口。WordPress 太重，Headless CMS 又要多养一个服务，于是想试试：只用 Python 标准库，能不能写一个够用、够安全的后台？\n\n结论是能，代码一千四百行左右。\n\n## 架构\n\n```\n浏览器（静态站）  →  data/content.json\n                          ↑ 保存/发布时写入\n浏览器（管理台）  →  cms/server.py  →  content/content.json（含草稿）\n                          ↓\n                      uploads/YYYY/MM/*.webp\n```\n\n- 前台是纯静态文件，Nginx 直接托管，不经过 Python\n- 后台只监听 `127.0.0.1:8090`，用 Nginx 反代或 SSH 隧道访问\n- 保存时同时写「私有源」和「公开产物」，草稿永远不进公开文件\n\n## 安全上做了什么\n\n1. **密码**：`pbkdf2_hmac('sha256', pw, salt, 200_000)`，只存盐和哈希\n2. **会话**：32 字节随机 token，`HttpOnly` + `SameSite=Strict`，12 小时过期\n3. **CSRF**：每个会话一个 token，所有写接口都要带 `X-CSRF-Token`\n4. **限流**：同 IP 连续 5 次密码错误，锁 10 分钟\n5. **上传**：不只信 `Content-Type`，按文件魔数判断真实类型\n6. **写盘**：临时文件 + `os.replace` 原子替换，避免写一半断电\n\n最关键的一条其实是：**后台不对外**。少暴露一个端口，就少一整类风险。\n\n## 一个片段\n\n`http.server` 看着简陋，但把路由和鉴权抽出来后并不难读：\n\n```python\ndef do_POST(self):\n    if self.path == '/api/login':\n        return self.login()\n    if not self.current_session():\n        return self.json({'error': '未登录'}, 401)\n    if self.headers.get('X-CSRF-Token') != self.session['csrf']:\n        return self.json({'error': 'CSRF 校验失败'}, 403)\n    return self.route_write()\n```\n\n## 取舍\n\n- 用 JSON 文件而不是数据库：文章数量在几百篇量级，够用，备份就是复制一个文件\n- 不做多人协作：只有我一个人写，省掉权限模型\n- 不做富文本编辑器：Markdown 更接近写代码的习惯，改写历史还能直接看 Git diff\n\n## 部署\n\n```bash\nsystemctl enable --now haidi-cms\nnginx -t && systemctl reload nginx\n```\n\n发布记录留在 Git 的 commit 里，出问题随时回滚。\n\n> 这个后台本身就是一次练习：不用框架，也能把 CRUD、鉴权和上传写明白。\n",
+      "level": "综合"
+    },
+    {
+      "id": "fasterrcnn-crowd",
+      "title": "用 FasterRCNN 做行人检测：26 人、2.2 秒与漏检原因",
+      "summary": "COCO 预训练模型直接推理、阈值 0.6、torchvision 画框，附 CPU 实测数据和失败案例分析。",
+      "date": "2026-11-17",
+      "tags": [
+        "PyTorch",
+        "FasterRCNN",
+        "计算机视觉"
+      ],
+      "draft": false,
+      "body": "## 任务与约束\n\n商场监控画面里数人。约束很明确：没有 GPU、不能训练、只能拿现成模型做推理，所以走 COCO 预训练 + 类别过滤。\n\n```python\nfrom torchvision.models.detection import fasterrcnn_resnet50_fpn, FasterRCNN_ResNet50_FPN_Weights\n\nweights = FasterRCNN_ResNet50_FPN_Weights.DEFAULT\nmodel = fasterrcnn_resnet50_fpn(weights=weights, box_score_thresh=0.6).eval()\n```\n\n## 推理流程\n\n```python\ntensor = F.pil_to_tensor(image).float().div(255)\nwith torch.no_grad():\n    out = model([tensor])[0]\nkeep = (out['labels'] == 1) & (out['scores'] >= 0.6)\nboxes, scores = out['boxes'][keep], out['scores'][keep]\n```\n\n- COCO 的 `person` 类别编号是 1；\n- 阈值 0.6 是速度和召回的折中；\n- 画框用 `torchvision.utils.draw_bounding_boxes`，把分数写进标签。\n\n## 实测结果\n\n| 图片 | 人数 | 平均置信度 | 推理耗时（CPU） |\n| --- | --- | --- | --- |\n| 商场主通道 | 26 | 0.917 | 2,386 ms |\n| 密集区域 | 24 | 0.849 | 2,151 ms |\n| 远景 | 12 | 0.834 | 2,138 ms |\n\n![检测结果](uploads/projects/crowd/detect-1.webp)\n\n*26 人，框上带置信度；远处的小目标开始漏检*\n\n平均 2.2 秒/张（i7，无 GPU）。这个速度能离线统计，不能做实时视频流。\n\n## 为什么会漏检\n\n1. **尺度**：远处的人只有十几像素，FasterRCNN 的 RPN 对小目标本身就不敏感；\n2. **遮挡**：密集区域的人互相挡住，NMS 又会把重叠框合并；\n3. **阈值**：0.6 过滤掉了低置信度的真目标。把阈值降到 0.4，能多找回几个人，但误检（海报、反光、模特）也会增加。\n\n## 如果继续做\n\n- 导出 ONNX + 半精度，CPU 上大概能快 2-3 倍；\n- 换单阶段模型（YOLOv8/RT-DETR），实时性更好；\n- 接视频流时按帧抽样（每 5 帧检测一次），中间用跟踪算法补；\n- 人数统计要加区域（ROI），否则路过和停留会被算在一起。\n",
+      "pinned": true,
+      "level": "研究"
+    },
+    {
+      "id": "cnn-hanzi",
+      "title": "手写汉字 CNN 复现：82.8% 背后，数据比模型更关键",
+      "summary": "97 类、1.2 万张变尺寸图片、碎图与标签错位；补白、增强、12 epoch 后测试准确率 82.8%。",
+      "date": "2026-11-16",
+      "tags": [
+        "TensorFlow",
+        "CNN",
+        "Keras"
+      ],
+      "draft": false,
+      "body": "## 原方案的问题\n\n原脚本很简单：所有图 resize 到 128×128 灰度，三层卷积，`epochs=80000000`。\n\n```python\nmodel.fit(train_images, train_labels, epochs=80000000, batch_size=64)\n```\n\n三个问题：epoch 数明显是笔误；没有验证集；直接 resize 会破坏字形。\n\n打开数据后发现更麻烦的事：图片是**变尺寸的裁剪**（62×81、66×30……），甚至混着 45×9 的碎图。直接拉伸后，字会变成锯齿状的一团。\n\n## 数据处理\n\n先按长边补白成正方形，再 resize：\n\n```python\nside = max(w, h)\ncanvas = Image.new('L', (side, side), 255)\ncanvas.paste(im, ((side - w) // 2, (side - h) // 2))\ncanvas = canvas.resize((96, 96), Image.LANCZOS)\n```\n\n- 保留长宽比，避免「窄字变胖」；\n- 过滤最小边 < 16 的碎图；\n- 标签表有 100 个字，训练目录只有 97 类，按目录编号映射并记录缺失。\n\n## 模型与训练\n\n```python\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Input((96, 96, 1)),\n    augment,                                  # 旋转/平移/缩放\n    tf.keras.layers.Conv2D(32, 3, padding='same', activation='relu'),\n    tf.keras.layers.MaxPooling2D(2),\n    tf.keras.layers.Conv2D(64, 3, padding='same', activation='relu'),\n    tf.keras.layers.MaxPooling2D(2),\n    tf.keras.layers.Conv2D(128, 3, padding='same', activation='relu'),\n    tf.keras.layers.MaxPooling2D(2),\n    tf.keras.layers.Flatten(),\n    tf.keras.layers.Dense(256, activation='relu'),\n    tf.keras.layers.Dropout(0.4),\n    tf.keras.layers.Dense(97, activation='softmax'),\n])\n```\n\n5,193 训练 / 576 验证 / 1,153 测试，batch 128，Adam 1e-3，12 epoch，CPU 上 167 秒。\n\n## 结果\n\n![训练曲线](uploads/projects/hanzi/training_curve.webp)\n\n- 验证准确率 82.5%，测试 **82.8%**；\n- 训练准确率只有 62.9%，验证反而更高——增强和 dropout 让训练集更难，这是正常的。\n\n![预测样例](uploads/projects/hanzi/predictions.webp)\n\n8 张随机样例中 7 张正确，错例是「秋 → 去」，两个字的上半部分确实相近。\n\n## 复盘\n\n1. **先看数据再调模型**。碎图和变形是主要瓶颈，不是网络深度；\n2. **验证集必须单独切**。原脚本拿测试集当验证集，82% 这个数字会虚高；\n3. **82.8% 是子集结果**（每类抽 60 张），全量复训还能提升；\n4. 下一步：分层采样、学习率衰减、混淆矩阵找易混字、把 100 类补全。\n",
+      "level": "研究"
+    },
+    {
+      "id": "kmeans-iris",
+      "title": "K-Means 选几个簇：轮廓系数说 2，业务说 3",
+      "summary": "复现鸢尾花聚类时发现原代码聚 4 类只画 3 类；用 ARI、轮廓系数把 k 重新选了一遍。",
+      "date": "2026-11-15",
+      "tags": [
+        "sklearn",
+        "K-Means",
+        "聚类"
+      ],
+      "draft": false,
+      "body": "## 原实现的三处问题\n\n```python\nestimator = KMeans(n_clusters=4)\nlabel_pred = estimator.labels_\nx0 = X[label_pred == 0]\nx1 = X[label_pred == 1]\nx2 = X[label_pred == 2]\n```\n\n鸢尾花只有 3 类，这里却聚成 4 类；画图只画了 label 0/1/2，第 4 类被静默丢掉；而且用前两个特征画散点，信息有损失。\n\n## 重新做\n\n用 PCA 把 4 维降到 2 维展示，聚类本身仍在 4 维上做：\n\n```python\npca = PCA(n_components=2).fit_transform(X)\nkm3 = KMeans(n_clusters=3, n_init=10, random_state=42).fit(X)\nadjusted_rand_score(y, km3.labels_)       # 0.73\nsilhouette_score(X, km3.labels_)          # 0.553\n```\n\n| k | ARI | 轮廓系数 |\n| --- | --- | --- |\n| 3 | **0.73** | 0.553 |\n| 4 | 0.65 | 0.498 |\n\n![聚类对比](uploads/projects/kmeans/clusters.webp)\n\n*左：真实类别；右：k=3 聚类，整体结构对得上*\n\n## 有意思的地方\n\n轮廓系数在 **k=2** 时最高，但鸢尾花明明是 3 类。原因很直接：versicolor 和 virginica 在特征空间里重叠，强行分成 2 类反而「更紧凑」。\n\n所以选 k 不能只看轮廓系数：要看业务含义、看 ARI（有标签时）、看不同 k 下的簇中心是否可解释。\n\n![轮廓系数](uploads/projects/kmeans/silhouette.webp)\n\n## 复盘\n\n- 聚类前要标准化，鸢尾花量纲接近影响不大，换成金额/年龄这种数据就必须做；\n- 原代码的 4 类 + 3 色图是典型的「跑通了但没检查」；\n- 下一步可以试 GMM（软聚类）或 DBSCAN，看能不能把重叠的两类分开。\n",
+      "level": "基础"
+    },
+    {
+      "id": "credit-default",
+      "title": "30,000 条信用卡数据：Accuracy 0.81，但 AUC 只有 0.76",
+      "summary": "四种分类器对比、类别不平衡、阈值与业务代价——一个「看起来不错」的模型为什么还不够。",
+      "date": "2026-11-14",
+      "tags": [
+        "sklearn",
+        "分类模型",
+        "特征工程"
+      ],
+      "draft": false,
+      "body": "## 数据与目标\n\n30,000 条持卡人，23 个特征，标签是「下个月是否逾期」。正例 22.1%，属于轻度不平衡。\n\n```python\nX_train, X_test, y_train, y_test = train_test_split(\n    features, target, test_size=0.3, stratify=target, random_state=1)\n```\n\n分层切分很重要：不分层时测试集的逾期率可能偏离 22%。\n\n## 四个模型\n\n```python\nmodels = {\n    '逻辑回归': Pipeline([('s', StandardScaler()), ('m', LogisticRegression(max_iter=1000))]),\n    '决策树': DecisionTreeClassifier(max_depth=6, random_state=1),\n    '随机森林': RandomForestClassifier(n_estimators=120, n_jobs=-1, random_state=1),\n    'KNN': Pipeline([('s', StandardScaler()), ('m', KNeighborsClassifier(n_neighbors=8))]),\n}\n```\n\n| 模型 | Accuracy | AUC |\n| --- | --- | --- |\n| 逻辑回归 | 0.811 | 0.722 |\n| 决策树 | 0.811 | 0.755 |\n| 随机森林 | **0.815** | **0.762** |\n| KNN | 0.804 | 0.724 |\n\n![模型对比](uploads/projects/credit/models.webp)\n\n## 为什么 Accuracy 会骗人\n\n22% 的正例下，一个「所有人都不会逾期」的模型也能拿到 78% 准确率。所以：\n\n- 逻辑回归 81.1% 看起来只比基线高 3 个点；\n- AUC 衡量的是排序能力，0.72 和 0.76 的差距更能说明模型有没有学到东西；\n- 真正上线还要看 Recall/Precision 和业务代价。\n\n## 阈值与业务代价\n\n默认 0.5 的阈值不一定合适。漏判一个会逾期的持卡人，损失可能是几千元；误判一个正常持卡人，损失只是一次人工复核。两类错误的代价差 10 倍以上，阈值应该往「宁可多查」的方向调。\n\n![标签分布](uploads/projects/credit/label-dist.webp)\n\n## 复盘\n\n- 随机森林最好，但 AUC 0.76 只能算「可用」，离生产还有距离；\n- 特征工程比换模型更有价值：额度使用率、还款延迟天数、账单/额度比；\n- 下一步用 `class_weight='balanced'`、代价敏感学习，或者直接做 uplift 建模。\n",
+      "level": "进阶"
+    },
+    {
+      "id": "xss-retro",
+      "title": "一次授权的 XSS 练习复盘：从存储型到 CSP",
+      "summary": "把反射型、存储型、DOM 型三类 XSS 放进同一个修复框架里看，重点是「为什么能打进去」。",
+      "date": "2026-11-12",
+      "tags": [
+        "安全",
+        "笔记"
+      ],
+      "draft": false,
+      "body": "## 背景\n\n2022 年我自己搭了一个 XSS 练习环境（就是「海底靶场」），只对自己的服务器做测试，最近下线归档。整理笔记时我刻意把重点放在**为什么打得进去、又该怎么修**，而不是怎么弹窗。\n\n## 反射型：参数直接回显\n\n最典型的一段 PHP：\n\n```php\n<?php echo '搜索结果：' . $_GET['q']; ?>\n```\n\n访问 `?q=<script>alert(1)</script>` 就会执行。修复只需要一行：\n\n```php\n<?php echo '搜索结果：' . htmlspecialchars($_GET['q'], ENT_QUOTES, 'UTF-8'); ?>\n```\n\n## 存储型：留言板\n\n留言存进数据库，列表页原样输出。它比反射型危险的地方在于**不用诱导点击**，任何人打开页面都会中招。\n\n修复要同时做三件事：\n\n1. 输出转义（首选，或让模板引擎自动转义）\n2. 给会话 Cookie 加 `HttpOnly`，让 `document.cookie` 拿不到\n3. 加 CSP，禁掉内联脚本和未知域名\n\n```\nContent-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'\n```\n\n## DOM 型：前端自己的坑\n\n```js\ndocument.getElementById('out').innerHTML = location.hash.slice(1);\n```\n\n这类问题后端完全看不到，因为数据根本没经过服务器。改用 `textContent`，或者用白名单库清洗后再插入。\n\n## 三道题的对比\n\n| 类型 | 数据落点 | 触发条件 | 主要修复 |\n| --- | --- | --- | --- |\n| 反射型 | URL 参数 | 诱导点击 | 输出转义 |\n| 存储型 | 数据库 | 打开页面 | 输出转义 + HttpOnly + CSP |\n| DOM 型 | 浏览器 | 前端赋值 | 避免 innerHTML / 白名单清洗 |\n\n## 反思\n\n做靶场的时候觉得「能弹窗就赢了」，真正写业务才发现，漏洞往往不是某个函数用错，而是**默认相信了输入**。\n\n现在写接口，我会先把三个问题写在注释里：\n\n- 这个字段从哪来？\n- 它会被渲染到 HTML、SQL 还是命令行？\n- 对应的转义在哪里做？\n\n想清楚这三个问题，大部分低级漏洞自然就没了。\n",
+      "level": "基础"
+    },
+    {
+      "id": "movie-review-sentiment",
+      "title": "50 条影评做情感分析：为什么我没报模型准确率",
+      "summary": "jieba + TF-IDF + 朴素贝叶斯/SVM 跑通了，但 50 条样本的分类指标没有意义，最后只保留可视化结论。",
+      "date": "2026-11-10",
+      "tags": [
+        "NLP",
+        "jieba",
+        "TF-IDF"
+      ],
+      "draft": false,
+      "body": "## 数据\n\n豆瓣长评 50 条，字段包括电影名、标题、正文、情感得分、情感分类。正面 47、中性 1、负面 2。\n\n## 流程\n\n```python\nwords = jieba.cut(text)\nvectorizer = TfidfVectorizer(max_features=5000)\nX = vectorizer.fit_transform(df['分词文本'])\nMultinomialNB().fit(X_train, y_train)\nSVC(kernel='linear').fit(X_train, y_train)\n```\n\n## 为什么只报可视化\n\n50 条数据按 8:2 切分，测试集只有 10 条。任何准确率都是「10 条里对了几条」，置信区间大到没有参考价值。所以最后只保留三件能站住脚的事：\n\n1. **情感分布**：47 正面 / 1 中性 / 2 负面；\n2. **评论长度**：平均 135 字；\n3. **高频词**：电影、镜头、导演、故事、时间。\n\n![情感分布](uploads/projects/film/sentiment.webp)\n\n![Top 电影](uploads/projects/film/top-movies.webp)\n\n## 采样偏差\n\n94% 正面不是「豆瓣好评率」，而是「愿意写长评的人更可能喜欢这部电影」。要得到可信结论，至少需要：\n\n- 几千条带标注的影评；\n- 按电影、按时间分层；\n- 用交叉验证而不是单次切分；\n- 人工标注一致性检查（Kappa）。\n\n## 复盘\n\n这个项目真正的价值是可视化流程：从 Excel 到分词、词云、分布图，一套能复用的模板。分类模型只能算「跑通了」，不能算「有结果」。\n",
+      "level": "基础"
+    }
+  ]
+}

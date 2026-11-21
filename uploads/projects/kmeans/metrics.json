@@ -1,0 +1,9 @@
+{
+  "samples": 150,
+  "features": 4,
+  "k3_ari": 0.73,
+  "k4_ari": 0.65,
+  "k3_silhouette": 0.553,
+  "k4_silhouette": 0.498,
+  "best_k_by_silhouette": 2
+}

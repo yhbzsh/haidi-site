@@ -1,0 +1,29 @@
+{
+  "rows": 30000,
+  "features": 23,
+  "positive_ratio": 0.221,
+  "models": [
+    {
+      "model": "逻辑回归",
+      "accuracy": 0.8109,
+      "auc": 0.7223
+    },
+    {
+      "model": "决策树",
+      "accuracy": 0.8113,
+      "auc": 0.7548
+    },
+    {
+      "model": "随机森林",
+      "accuracy": 0.8151,
+      "auc": 0.7622
+    },
+    {
+      "model": "KNN",
+      "accuracy": 0.8036,
+      "auc": 0.7243
+    }
+  ],
+  "best_accuracy": "随机森林",
+  "best_auc": "随机森林"
+}

@@ -1,0 +1,26 @@
+{
+  "device": "cpu",
+  "images": 3,
+  "max_persons": 26,
+  "avg_infer_ms": 2225,
+  "detail": [
+    {
+      "image": "0030cbde7ebf96cb48653e522c5552ce.jpg",
+      "persons": 26,
+      "avg_score": 0.917,
+      "infer_ms": 2386
+    },
+    {
+      "image": "00329c08e0da69cabc1f9e6c717620d4.jpg",
+      "persons": 12,
+      "avg_score": 0.834,
+      "infer_ms": 2138
+    },
+    {
+      "image": "003db6ca3fcbf144ec84c37190ff8154.jpg",
+      "persons": 24,
+      "avg_score": 0.849,
+      "infer_ms": 2151
+    }
+  ]
+}

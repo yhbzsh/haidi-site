@@ -1,0 +1,10 @@
+{
+  "reviews": 50,
+  "positive": 47,
+  "neutral": 1,
+  "negative": 2,
+  "positive_ratio": 0.94,
+  "avg_score": 0.949,
+  "movies": 41,
+  "avg_length": 135
+}

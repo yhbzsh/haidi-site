@@ -1,0 +1,28 @@
+{
+  "total": 11573,
+  "salary_valid": 8212,
+  "salary_missing": 3361,
+  "salary_median": 3750,
+  "salary_mean": 4427,
+  "salary_p90": 9000,
+  "education_top": "学历不限",
+  "scale_top": "30-99人",
+  "nature_top": "民营",
+  "experience_top": "经验不限",
+  "top_keywords": [
+    "普工(658)",
+    "操作工(586)",
+    "保洁(511)",
+    "保安(344)",
+    "文员(343)",
+    "客服(323)"
+  ],
+  "charts": [
+    "uploads/projects/recruit/salary.webp",
+    "uploads/projects/recruit/education.webp",
+    "uploads/projects/recruit/scale.webp",
+    "uploads/projects/recruit/nature.webp",
+    "uploads/projects/recruit/experience.webp",
+    "uploads/projects/recruit/keywords.webp"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "runs": {
+    "DQN": {
+      "episodes": 7320,
+      "eval_reward": {
+        "points": 176,
+        "first": 353.23,
+        "last": 602.3,
+        "max": 743.09,
+        "mean": 306.61
+      },
+      "avg_reward": {
+        "points": 7320,
+        "first": 8.62,
+        "last": 317.84,
+        "max": 377.2,
+        "mean": 246.89
+      },
+      "max_x_pos": {
+        "points": 176,
+        "first": 1946.0,
+        "last": 3154.0,
+        "max": 3161.0,
+        "mean": 1682.88
+      }
+    },
+    "PPO": {
+      "episodes": 3516,
+      "eval_reward": {
+        "points": 150,
+        "first": 379.2,
+        "last": 411.9,
+        "max": 708.42,
+        "mean": 356.09
+      },
+      "avg_reward": {
+        "points": 3516,
+        "first": 699.38,
+        "last": 510.53,
+        "max": 699.38,
+        "mean": 427.08
+      },
+      "max_x_pos": {
+        "points": 150,
+        "first": 2227.0,
+        "last": 2402.0,
+        "max": 3161.0,
+        "mean": 2075.51
+      }
+    }
+  },
+  "checkpoints": {
+    "ppo_steps": 2110000,
+    "ppo_episodes": 5957
+  }
+}

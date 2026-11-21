@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 · 海平面以下没有这个页面 · 海底</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .bg__img { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.82); }
+    .lost {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      display: grid;
+      place-content: center;
+      justify-items: center;
+      padding: 24px;
+      text-align: center;
+      color: #fff;
+    }
+    .lost__code {
+      font-size: clamp(86px, 16vw, 148px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 8px;
+      background: linear-gradient(120deg, #fff, #9fe9e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 12px 26px rgba(6, 16, 22, .45));
+    }
+    .lost p { margin-top: 10px; color: rgba(255, 255, 255, .82); font-size: 15px; letter-spacing: 1px; }
+    .lost small { display: block; margin-top: 4px; font-size: 12px; color: rgba(255, 255, 255, .55); letter-spacing: 1.5px; }
+    .lost__actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; justify-content: center; }
+    .lost .btn { background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .42); color: #fff; }
+    .lost .btn:hover { background: rgba(255, 255, 255, .24); }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <img class="bg__img" src="img/web/bg-start.webp" alt="" width="1440" height="810">
+  </div>
+  <div class="veil" aria-hidden="true"></div>
+
+  <main class="lost">
+    <div class="lost__code">404</div>
+    <p>海平面以下，没有这个页面。</p>
+    <small>THE PAGE IS LOST IN THE DEEP</small>
+    <div class="lost__actions">
+      <a class="btn" href="/">回到首页</a>
+      <a class="btn" href="/#/blog">去看看博客</a>
+      <a class="btn" href="mailto:3215703361@qq.com">邮件找站长</a>
+    </div>
+  </main>
+</body>
+</html>
